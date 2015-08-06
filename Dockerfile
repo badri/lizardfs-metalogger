@@ -15,4 +15,8 @@ RUN apt-get -y update
 
 RUN apt-get -y install lizardfs-metalogger
 
+RUN cp /etc/mfs/mfsmetalogger.cfg.dist /etc/mfs/mfsmetalogger.cfg
 
+RUN sed -i 's/LIZARDFSMETALOGGER_ENABLE=false/LIZARDFSMETALOGGER_ENABLE=true/g'  /etc/default/lizardfs-metalogger
+
+ENTRYPOINT  ["mfsmetalogger", "-d", "start"]
